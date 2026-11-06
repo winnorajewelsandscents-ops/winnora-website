@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINNORA | Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="brand">
+            <a href="index.html">
+                <img src="logo.jpeg" alt="WINNORA Logo" class="logo">
+            </a>
+            <p>ESSENCE OF YOU</p>
+        </div>
+    </header>
+
+    <main class="admin-dashboard">
+
+        <h1>WINNORA Administration</h1>
+
+        <p>Manage your products and collections.</p>
+
+        <button id="logout-button" type="button">LOG OUT</button>
+
+        <section class="admin-product-form">
+
+            <h2>Add a New Product</h2>
+
+            <form id="product-form">
+
+                <label for="product-name">Product Name</label>
+                <input type="text" id="product-name" required>
+
+                <label for="product-description">Description</label>
+                <textarea id="product-description" required></textarea>
+
+                <label for="product-price">Price (KES)</label>
+                <input type="number" id="product-price" min="0" step="0.01" required>
+
+                <label for="product-category">Category</label>
+                <select id="product-category" required>
+                    <option value="">Select category</option>
+                    <option value="Earrings">Earrings</option>
+                    <option value="Rings">Rings</option>
+                    <option value="Necklaces">Necklaces</option>
+                    <option value="Watches">Watches</option>
+                    <option value="Bracelets">Bracelets</option>
+                    <option value="Anklets">Anklets</option>
+                    <option value="Floral">Floral Perfumes</option>
+                    <option value="Fruity">Fruity Perfumes</option>
+                    <option value="Fresh">Fresh Perfumes</option>
+                    <option value="Oriental">Oriental Perfumes</option>
+                    <option value="Woody">Woody Perfumes</option>
+                    <option value="Signature">Signature Perfumes</option>
+                </select>
+
+                <label for="product-image">Product Photograph</label>
+                <input type="file" id="product-image" accept="image/*" required>
+
+                <button type="submit">ADD PRODUCT</button>
+
+                <p id="product-message"></p>
+
+            </form>
+
+        </section>
+
+        <section class="admin-product-list">
+            <h2>Your Products</h2>
+            <div id="products-container">
+                Loading products...
+            </div>
+        </section>
+
+    </main>
+
+    <script type="module" src="dashboard.js"></script>
+
+</body>
+</html>

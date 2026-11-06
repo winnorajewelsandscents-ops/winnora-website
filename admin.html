@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WINNORA | Admin Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <section class="admin-login">
+        <div class="admin-login-box">
+
+            <img src="logo.jpeg" alt="WINNORA Logo" class="logo">
+
+            <p>ESSENCE OF YOU</p>
+
+            <h1>Administrator Login</h1>
+
+            <p>Welcome to the WINNORA management portal.</p>
+
+            <form id="admin-login-form">
+
+                <label for="admin-email">Email Address</label>
+                <input
+                    type="email"
+                    id="admin-email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label for="admin-password">Password</label>
+                <input
+                    type="password"
+                    id="admin-password"
+                    placeholder="Enter your password"
+                    required
+                >
+
+                <button type="submit">LOGIN</button>
+
+                <p id="login-message"></p>
+
+            </form>
+
+        </div>
+    </section>
+
+    <script type="module" src="admin.js"></script>
+
+</body>
+</html>
