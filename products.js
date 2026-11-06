@@ -44,21 +44,20 @@ async function loadProducts() {
         const description = document.createElement("p");
         description.textContent = product.description;
 
-        const price = document.createElement("p");
-        price.textContent =
-            "KES " + Number(product.price).toLocaleString("en-KE");
-
-        const enquire = document.createElement("a");
-        enquire.className = "hero-button";
-        enquire.textContent = "ENQUIRE ON WHATSAPP";
-        enquire.href =
-            "https://wa.me/254742345359?text=" +
-            encodeURIComponent(
-                "Hello WINNORA, I would like to enquire about " +
-                product.name + "."
-            );
-        enquire.target = "_blank";
-        enquire.rel = "noopener noreferrer";
+       const enquire = document.createElement("a");
+enquire.className = "hero-button";
+enquire.textContent = "ORDER NOW";
+enquire.href =
+    "https://wa.me/254742345359?text=" +
+    encodeURIComponent(
+        "Hello WINNORA! I would like to order " +
+        product.name +
+        " priced at KES " +
+        Number(product.price).toLocaleString("en-KE") +
+        ". Please assist me with completing my order."
+    );
+enquire.target = "_blank";
+enquire.rel = "noopener noreferrer";
 
         card.append(image, name, description, price, enquire);
         productGrid.appendChild(card);
