@@ -43,7 +43,9 @@ async function loadProducts() {
 
         const description = document.createElement("p");
         description.textContent = product.description;
-
+const price = document.createElement("p");
+price.textContent =
+    "KES " + Number(product.price).toLocaleString("en-KE");
        const enquire = document.createElement("a");
 enquire.className = "hero-button";
 enquire.textContent = "ORDER NOW";
