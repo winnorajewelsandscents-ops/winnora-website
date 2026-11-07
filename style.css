@@ -1505,15 +1505,17 @@ footer {
 .admin-order-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 12px;
+    gap: 8px;
+    margin-bottom: 8px;
 }
 
 .admin-order-item-image {
-    width: 65px;
-    height: 65px;
+    width: 35px !important;
+    height: 35px !important;
+    max-width: 35px !important;
+    max-height: 35px !important;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 4px;
     flex-shrink: 0;
 }
 
