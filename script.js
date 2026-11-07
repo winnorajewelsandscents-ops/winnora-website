@@ -68,3 +68,37 @@ if (productImage && imageViewer && enlargedImage && closeViewer) {
     });
 
 }
+/* =================================
+   WINNORA SHOPPING CART CONTROLS
+================================= */
+
+const cartToggle = document.getElementById("cart-toggle");
+const cartPanel = document.getElementById("cart-panel");
+const cartOverlay = document.getElementById("cart-overlay");
+const cartClose = document.getElementById("cart-close");
+
+function openCart() {
+    cartPanel.classList.add("active");
+    cartOverlay.classList.add("active");
+
+    cartPanel.setAttribute("aria-hidden", "false");
+    cartToggle.setAttribute("aria-expanded", "true");
+}
+
+function closeCart() {
+    cartPanel.classList.remove("active");
+    cartOverlay.classList.remove("active");
+
+    cartPanel.setAttribute("aria-hidden", "true");
+    cartToggle.setAttribute("aria-expanded", "false");
+}
+
+if (cartToggle && cartPanel && cartOverlay && cartClose) {
+
+    cartToggle.addEventListener("click", openCart);
+
+    cartClose.addEventListener("click", closeCart);
+
+    cartOverlay.addEventListener("click", closeCart);
+
+}
