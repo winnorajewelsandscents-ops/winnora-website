@@ -88,17 +88,38 @@ const statusDropdown = document.createElement("select");
 
         const itemsList = document.createElement("ul");
 
-        (order.order_items || []).forEach(function (item) {
-            const listItem = document.createElement("li");
+       (order.order_items || []).forEach(function (item) {
 
-            listItem.textContent =
-                item.product_name +
-                " — Quantity: " + item.quantity +
-                " — KES " + item.line_total;
+    const listItem = document.createElement("li");
 
-            itemsList.appendChild(listItem);
-        });
+    const itemImage = document.createElement("img");
 
+    itemImage.src = item.products?.image_url || "";
+    itemImage.alt = item.product_name;
+
+    itemImage.style.width = "75px";
+    itemImage.style.height = "75px";
+    itemImage.style.objectFit = "cover";
+    itemImage.style.borderRadius = "5px";
+    itemImage.style.marginRight = "12px";
+    itemImage.style.verticalAlign = "middle";
+
+    const itemDetails = document.createElement("span");
+
+    itemDetails.textContent =
+        item.product_name +
+        " — Quantity: " + item.quantity +
+        " — KES " + item.line_total;
+
+    if (item.products?.image_url) {
+        listItem.appendChild(itemImage);
+    }
+
+    listItem.appendChild(itemDetails);
+
+    itemsList.appendChild(listItem);
+
+});
         card.append(
             heading,
             customer,
