@@ -1398,3 +1398,105 @@ footer {
         height: 150px;
     }
 }
+/* WINNORA ORDER TRACKING PAGE */
+
+.track-order-page {
+    min-height: 75vh;
+    background: linear-gradient(180deg, #FFF8F7, #F8EDEF);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+}
+
+.track-order-box {
+    background: white;
+    width: 100%;
+    max-width: 550px;
+    padding: 45px 35px;
+    text-align: center;
+    box-shadow: 0 8px 30px rgba(23, 23, 47, 0.08);
+    border: 1px solid #EAD9DD;
+}
+
+.track-order-box h1 {
+    color: #17172F;
+    font-size: 30px;
+    font-weight: normal;
+    margin-bottom: 15px;
+}
+
+.track-order-box > p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 30px;
+}
+
+#track-order-form {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 12px;
+}
+
+#track-order-form label {
+    color: #17172F;
+    font-size: 14px;
+}
+
+#track-order-form input {
+    padding: 14px;
+    border: 1px solid #D9C5C8;
+    background: #FFF8F7;
+    font: inherit;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#track-order-form input:focus {
+    outline: 1px solid #C6A36A;
+    border-color: #C6A36A;
+}
+
+#track-order-form button {
+    background: #17172F;
+    color: white;
+    border: 1px solid #C6A36A;
+    padding: 15px;
+    cursor: pointer;
+    letter-spacing: 1px;
+    margin-top: 12px;
+}
+
+#track-order-form button:hover {
+    background: #C6A36A;
+}
+
+#tracking-message {
+    color: #17172F;
+    font-size: 14px;
+    overflow-wrap: anywhere;
+}
+
+.back-home {
+    display: inline-block;
+    margin-top: 25px;
+    color: #17172F;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.back-home:hover {
+    color: #C6A36A;
+}
+
+@media (max-width: 600px) {
+    .track-order-box {
+        padding: 30px 20px;
+    }
+
+    .track-order-box h1 {
+        font-size: 25px;
+    }
+}
