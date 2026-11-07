@@ -138,51 +138,180 @@
         <p>&copy; 2026 WINNORA. All rights reserved.</p>
     </footer>
 <script>
-        const checkoutItems = document.getElementById("checkout-items");
-        const checkoutSubtotal = document.getElementById("checkout-subtotal");
+const checkoutItems = document.getElementById("checkout-items");
+const checkoutSubtotal = document.getElementById("checkout-subtotal");
+const checkoutForm = document.getElementById("checkout-form");
+const submitButton = checkoutForm.querySelector(
+    'button[type="submit"]'
+);
 
-        let cart = [];
+// WINNORA Supabase connection
+const ORDER_URL =
+    "https://mvqehokzdxnffzhztiir.supabase.co/functions/v1/place-order";
 
-        try {
-            cart = JSON.parse(
-                localStorage.getItem("winoraCart") || "[]"
-            );
-        } catch (error) {
-            cart = [];
-        }
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable__fbfvfT-cAenAq8SQaqZYA_xP9QT-E0";
 
-        checkoutItems.innerHTML = "";
+let cart = [];
 
-        if (cart.length === 0) {
-            checkoutItems.textContent =
-                "Your shopping bag is empty.";
-        }
+try {
+    cart = JSON.parse(
+        localStorage.getItem("winoraCart") || "[]"
+    );
 
-        let subtotal = 0;
+    if (!Array.isArray(cart)) cart = [];
+} catch (error) {
+    cart = [];
+}
 
-        cart.forEach(function (item) {
+// Display order summary
+function displayCart() {
+    checkoutItems.innerHTML = "";
 
-            subtotal += Number(item.price) * Number(item.quantity);
+    if (cart.length === 0) {
+        checkoutItems.textContent =
+            "Your shopping bag is empty.";
+        checkoutSubtotal.textContent = "KES 0";
+        submitButton.disabled = true;
+        return;
+    }
 
-            const product = document.createElement("div");
-            product.className = "checkout-product";
+    let subtotal = 0;
 
-            const name = document.createElement("p");
-            name.textContent = item.name + " × " + item.quantity;
+    cart.forEach(function(item) {
+        const price = Number(item.price);
+        const quantity = Number(item.quantity);
 
-            const price = document.createElement("strong");
-            price.textContent =
-                "KES " +
-                (Number(item.price) * Number(item.quantity))
-                    .toLocaleString("en-KE");
+        if (
+            !Number.isFinite(price) ||
+            !Number.isSafeInteger(quantity) ||
+            quantity < 1
+        ) return;
 
-            product.append(name, price);
-            checkoutItems.appendChild(product);
+        subtotal += price * quantity;
+
+        const product = document.createElement("div");
+        product.className = "checkout-product";
+
+        const name = document.createElement("p");
+        name.textContent = item.name + " × " + quantity;
+
+        const amount = document.createElement("strong");
+        amount.textContent =
+            "KES " +
+            (price * quantity).toLocaleString("en-KE");
+
+        product.append(name, amount);
+        checkoutItems.appendChild(product);
+    });
+
+    checkoutSubtotal.textContent =
+        "KES " + subtotal.toLocaleString("en-KE");
+
+    submitButton.disabled = false;
+}
+
+displayCart();
+
+// Order status message
+const statusMessage = document.createElement("p");
+statusMessage.setAttribute("aria-live", "polite");
+statusMessage.style.marginTop = "15px";
+checkoutForm.appendChild(statusMessage);
+
+// Submit order to Supabase
+checkoutForm.addEventListener("submit", async function(event) {
+    event.preventDefault();
+
+    if (cart.length === 0) {
+        statusMessage.textContent =
+            "Your shopping bag is empty.";
+        return;
+    }
+
+    const customerName =
+        document.getElementById("customer-name").value.trim();
+
+    const customerPhone =
+        document.getElementById("customer-phone").value.trim();
+
+    const deliveryLocation =
+        document.getElementById("delivery-location").value.trim();
+
+    const deliveryNotes =
+        document.getElementById("delivery-notes").value.trim();
+
+    const paymentMethod =
+        checkoutForm.elements["payment-method"].value;
+
+    const items = cart.map(function(item) {
+        return {
+            id: item.id,
+            quantity: item.quantity
+        };
+    });
+
+    submitButton.disabled = true;
+    submitButton.textContent = "PROCESSING...";
+    statusMessage.textContent =
+        "Please wait while we submit your order.";
+
+    try {
+        const response = await fetch(ORDER_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "apikey": SUPABASE_PUBLISHABLE_KEY
+            },
+            body: JSON.stringify({
+                customer_name: customerName,
+                customer_phone: customerPhone,
+                delivery_location: deliveryLocation,
+                delivery_notes: deliveryNotes,
+                payment_method: paymentMethod,
+                items: items
+            })
         });
 
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.error || "Unable to submit your order."
+            );
+        }
+
+        // Clear cart only after successful order
+        localStorage.removeItem("winoraCart");
+        cart = [];
+
+        checkoutItems.textContent =
+            "Your order has been received successfully!";
+
         checkoutSubtotal.textContent =
-            "KES " + subtotal.toLocaleString("en-KE");
-    </script>
+            "KES " + Number(result.subtotal).toLocaleString("en-KE");
+
+        checkoutForm.reset();
+
+        statusMessage.textContent =
+            "Thank you for shopping with WINNORA! " +
+            "Your order reference is " + result.order_id +
+            ". We will contact you about delivery and payment.";
+
+        submitButton.textContent = "ORDER RECEIVED";
+
+    } catch (error) {
+        console.error("Checkout error:", error);
+
+        statusMessage.textContent =
+            error.message ||
+            "Something went wrong. Please try again.";
+
+        submitButton.disabled = false;
+        submitButton.textContent = "PLACE ORDER";
+    }
+});
+</script>
 </body>
 </html>
 </body>
