@@ -183,6 +183,61 @@ try {
     cart = [];
     isDirectOrder = false;
 }
+
+// DISPLAY CHECKOUT ITEMS
+
+function displayCart() {
+
+    checkoutItems.innerHTML = "";
+
+    if (cart.length === 0) {
+        checkoutItems.textContent = "Your shopping bag is empty.";
+        checkoutSubtotal.textContent = "KES 0";
+        return;
+    }
+
+    let subtotal = 0;
+
+    cart.forEach(function(item) {
+
+        const itemPrice = Number(item.price) || 0;
+        const quantity = Number(item.quantity) || 1;
+        const itemTotal = itemPrice * quantity;
+
+        subtotal += itemTotal;
+
+        const itemContainer = document.createElement("div");
+        itemContainer.className = "checkout-item";
+
+        const image = document.createElement("img");
+        image.src = item.image_url || "";
+        image.alt = item.name || "Product";
+        image.style.width = "60px";
+        image.style.height = "60px";
+        image.style.objectFit = "cover";
+
+        const details = document.createElement("div");
+
+        const name = document.createElement("p");
+        name.textContent = item.name;
+
+        const quantityText = document.createElement("p");
+        quantityText.textContent = "Quantity: " + quantity;
+
+        const price = document.createElement("p");
+        price.textContent =
+            "KES " + itemTotal.toLocaleString("en-KE");
+
+        details.append(name, quantityText, price);
+        itemContainer.append(image, details);
+
+        checkoutItems.appendChild(itemContainer);
+    });
+
+    checkoutSubtotal.textContent =
+        "KES " + subtotal.toLocaleString("en-KE");
+}
+
 displayCart();
 
 // Order status message
