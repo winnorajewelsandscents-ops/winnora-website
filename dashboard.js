@@ -88,32 +88,38 @@ const statusDropdown = document.createElement("select");
 
         const itemsList = document.createElement("ul");
 
-       (order.order_items || []).forEach(function (item) {
+     (order.order_items || []).forEach(function (item) {
 
     const listItem = document.createElement("li");
+    listItem.className = "admin-order-item";
 
-    const itemImage = document.createElement("img");
-
-    itemImage.src = item.products?.image_url || "";
-    itemImage.alt = item.product_name;
-
-    itemImage.style.width = "75px";
-    itemImage.style.height = "75px";
-    itemImage.style.objectFit = "cover";
-    itemImage.style.borderRadius = "5px";
-    itemImage.style.marginRight = "12px";
-    itemImage.style.verticalAlign = "middle";
-
-    const itemDetails = document.createElement("span");
-
-    itemDetails.textContent =
-        item.product_name +
-        " — Quantity: " + item.quantity +
-        " — KES " + item.line_total;
+    const itemDetails = document.createElement("div");
+    itemDetails.className = "admin-order-item-details";
 
     if (item.products?.image_url) {
+        const itemImage = document.createElement("img");
+
+        itemImage.src = item.products.image_url;
+        itemImage.alt = item.product_name;
+        itemImage.className = "admin-order-item-image";
+
         listItem.appendChild(itemImage);
     }
+
+    const itemName = document.createElement("h5");
+    itemName.textContent = item.product_name;
+
+    const itemQuantity = document.createElement("p");
+    itemQuantity.textContent = "Quantity: " + item.quantity;
+
+    const itemPrice = document.createElement("p");
+    itemPrice.textContent = "KES " + item.line_total;
+
+    itemDetails.append(
+        itemName,
+        itemQuantity,
+        itemPrice
+    );
 
     listItem.appendChild(itemDetails);
 
