@@ -97,7 +97,10 @@ async function loadProducts() {
         });
 
        // ORDER NOW BUTTON - DIRECT CHECKOUT
-
+const enquire = document.createElement("button");
+enquire.type = "button";
+enquire.className = "hero-button";
+enquire.textContent = "ORDER NOW";
 enquire.addEventListener("click", function () {
 
     const directOrder = {
