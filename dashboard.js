@@ -1,5 +1,140 @@
 import { supabase } from "./supabase-config.js";
+// CUSTOMER ORDERS ELEMENTS
+const ordersContainer = document.getElementById("orders-container");
+const ordersMessage = document.getElementById("orders-message");
+const refreshOrdersButton = document.getElementById("refresh-orders-button");
+// LOAD CUSTOMER ORDERS
+async function loadOrders() {
+    ordersMessage.textContent = "Loading customer orders...";
+    ordersContainer.innerHTML = "";
 
+    const { data, error } = await supabase
+        .from("orders")
+        .select("*, order_items(*)")
+        .order("created_at", { ascending: false });
+
+    if (error) {
+        ordersMessage.textContent =
+            "Could not load orders: " + error.message;
+        return;
+    }
+
+    if (!data || data.length === 0) {
+        ordersMessage.textContent = "No customer orders yet.";
+        return;
+    }
+
+    ordersMessage.textContent =
+        data.length + " customer order(s) found.";
+
+    data.forEach(function (order) {
+        const card = document.createElement("div");
+        card.className = "admin-order-card";
+
+        const heading = document.createElement("h3");
+        heading.textContent = "Order #" + order.id;
+
+        const customer = document.createElement("p");
+        customer.textContent = "Customer: " + order.customer_name;
+
+        const phone = document.createElement("p");
+        phone.textContent = "Phone: " + order.customer_phone;
+
+        const location = document.createElement("p");
+        location.textContent = "Delivery Location: " + order.delivery_location;
+
+        const notes = document.createElement("p");
+        notes.textContent = "Delivery Notes: " +
+            (order.delivery_notes || "None");
+
+        const payment = document.createElement("p");
+        payment.textContent = "Payment Method: " + order.payment_method;
+
+        const paymentStatus = document.createElement("p");
+        paymentStatus.textContent = "Payment Status: " + order.payment_status;
+const statusDropdown = document.createElement("select");
+
+        const orderStatuses = [
+            "pending",
+            "processing",
+            "completed",
+            "cancelled"
+        ];
+
+        orderStatuses.forEach(function (value) {
+            const option = document.createElement("option");
+            option.value = value;
+            option.textContent =
+                value.charAt(0).toUpperCase() + value.slice(1);
+
+            if (value === order.order_status) {
+                option.selected = true;
+            }
+
+            statusDropdown.appendChild(option);
+        });
+
+        statusDropdown.addEventListener("change", function () {
+            updateOrderStatus(order.id, statusDropdown.value);
+        });
+        const total = document.createElement("p");
+        total.textContent = "Total: KES " + order.total;
+
+        const status = document.createElement("p");
+        status.textContent = "Order Status: " + order.order_status;
+
+        const itemsHeading = document.createElement("h4");
+        itemsHeading.textContent = "Items Ordered";
+
+        const itemsList = document.createElement("ul");
+
+        (order.order_items || []).forEach(function (item) {
+            const listItem = document.createElement("li");
+
+            listItem.textContent =
+                item.product_name +
+                " — Quantity: " + item.quantity +
+                " — KES " + item.line_total;
+
+            itemsList.appendChild(listItem);
+        });
+
+        card.append(
+            heading,
+            customer,
+            phone,
+            location,
+            notes,
+            payment,
+            paymentStatus,
+            total,
+            status,
+            statusDropdown
+            itemsHeading,
+            itemsList
+        );
+
+        ordersContainer.appendChild(card);
+    });
+}
+// UPDATE ORDER STATUS
+async function updateOrderStatus(orderId, newStatus) {
+    const { error } = await supabase
+        .from("orders")
+        .update({
+            order_status: newStatus
+        })
+        .eq("id", orderId);
+
+    if (error) {
+        alert("Could not update order: " + error.message);
+        return;
+    }
+
+    alert("Order status updated successfully!");
+
+    await loadOrders();
+}
 const productForm = document.getElementById("product-form");
 const productMessage = document.getElementById("product-message");
 const productsContainer = document.getElementById("products-container");
@@ -257,9 +392,15 @@ logoutButton.addEventListener("click", async function () {
     window.location.href = "admin.html";
 });
 
+// REFRESH CUSTOMER ORDERS
+refreshOrdersButton.addEventListener("click", async function () {
+    await loadOrders();
+});
+
 // START DASHBOARD
 const loggedIn = await checkLogin();
 
 if (loggedIn) {
     await loadProducts();
+    await loadOrders();
 }
