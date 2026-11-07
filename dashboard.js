@@ -235,7 +235,8 @@ async function loadProducts() {
 
         const category = document.createElement("p");
         category.textContent = product.category;
-
+const stock = document.createElement("p");
+stock.textContent = "Stock available: " + product.stock_quantity;
        const editButton = document.createElement("button");
 editButton.textContent = "EDIT";
 editButton.addEventListener("click", function () {
@@ -248,7 +249,15 @@ deleteButton.addEventListener("click", function () {
     deleteProduct(product);
 });
 
-card.append(image, name, price, category, editButton, deleteButton);
+card.append(
+    image,
+    name,
+    price,
+    category,
+    stock,
+    editButton,
+    deleteButton
+);
         productsContainer.appendChild(card);
     });
 }
