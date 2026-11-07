@@ -50,8 +50,29 @@ async function loadOrders() {
         const payment = document.createElement("p");
         payment.textContent = "Payment Method: " + order.payment_method;
 
-        const paymentStatus = document.createElement("p");
-        paymentStatus.textContent = "Payment Status: " + order.payment_status;
+       // PAYMENT STATUS DROPDOWN
+
+const paymentStatus = document.createElement("select");
+
+const paymentStatuses = ["unpaid", "paid"];
+
+paymentStatuses.forEach(function (value) {
+    const option = document.createElement("option");
+
+    option.value = value;
+    option.textContent =
+        value.charAt(0).toUpperCase() + value.slice(1);
+
+    if (value === String(order.payment_status).toLowerCase()) {
+        option.selected = true;
+    }
+
+    paymentStatus.appendChild(option);
+});
+
+paymentStatus.addEventListener("change", function () {
+    updatePaymentStatus(order.id, paymentStatus.value);
+});
 const statusDropdown = document.createElement("select");
 
         const orderStatuses = [
