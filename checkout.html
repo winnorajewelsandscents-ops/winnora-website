@@ -152,19 +152,29 @@ const ORDER_URL =
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable__fbfvfT-cAenAq8SQaqZYA_xP9QT-E0";
 
+// CHECK FOR DIRECT ORDER OR SHOPPING CART
+
 let cart = [];
+let isDirectOrder = false;
 
 try {
-    cart = JSON.parse(
-        localStorage.getItem("winoraCart") || "[]"
-    );
+    const directOrder = localStorage.getItem("winoraDirectOrder");
+
+    if (directOrder) {
+        cart = [JSON.parse(directOrder)];
+        isDirectOrder = true;
+    } else {
+        cart = JSON.parse(
+            localStorage.getItem("winoraCart") || "[]"
+        );
+    }
 
     if (!Array.isArray(cart)) cart = [];
+
 } catch (error) {
     cart = [];
-}
-
-// Display order summary
+    isDirectOrder = false;
+}order summary
 function displayCart() {
     checkoutItems.innerHTML = "";
 
@@ -281,10 +291,15 @@ checkoutForm.addEventListener("submit", async function(event) {
             );
         }
 
-        // Clear cart only after successful order
-        localStorage.removeItem("winoraCart");
-        cart = [];
+      // Clear only the items that were successfully ordered
 
+if (isDirectOrder) {
+    localStorage.removeItem("winoraDirectOrder");
+} else {
+    localStorage.removeItem("winoraCart");
+}
+
+cart = [];
         checkoutItems.textContent =
             "Your order has been received successfully!";
 
