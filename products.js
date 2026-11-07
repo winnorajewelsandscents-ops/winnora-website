@@ -60,6 +60,22 @@ if (stockQuantity > 0) {
 } else {
     stock.textContent = "Currently out of stock";
 }
+        // QUANTITY SELECTION
+
+const quantityLabel = document.createElement("label");
+quantityLabel.textContent = "Quantity";
+
+const quantityInput = document.createElement("input");
+quantityInput.type = "number";
+quantityInput.min = "1";
+quantityInput.max = String(stockQuantity);
+quantityInput.step = "1";
+quantityInput.value = "1";
+quantityInput.className = "product-quantity";
+
+if (stockQuantity <= 0) {
+    quantityInput.disabled = true;
+}
         // ADD TO CART BUTTON
 
         const addToCart = document.createElement("button");
