@@ -111,7 +111,7 @@ const statusDropdown = document.createElement("select");
             status,
             statusDropdown,
             itemsHeading,
-            itemsList
+            itemsList,
         );
 
         ordersContainer.appendChild(card);
