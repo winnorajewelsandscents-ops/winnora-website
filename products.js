@@ -30,6 +30,7 @@ async function loadProducts() {
     }
 
     data.forEach(function (product) {
+
         const card = document.createElement("div");
         card.className = "product-card";
 
@@ -43,25 +44,86 @@ async function loadProducts() {
 
         const description = document.createElement("p");
         description.textContent = product.description;
-const price = document.createElement("p");
-price.textContent =
-    "KES " + Number(product.price).toLocaleString("en-KE");
-       const enquire = document.createElement("a");
-enquire.className = "hero-button";
-enquire.textContent = "ORDER NOW";
-enquire.href =
-    "https://wa.me/254742345359?text=" +
-    encodeURIComponent(
-        "Hello WINNORA! I would like to order " +
-        product.name +
-        " priced at KES " +
-        Number(product.price).toLocaleString("en-KE") +
-        ". Please assist me with completing my order."
-    );
-enquire.target = "_blank";
-enquire.rel = "noopener noreferrer";
 
-        card.append(image, name, description, price, enquire);
+        const price = document.createElement("p");
+        price.textContent =
+            "KES " + Number(product.price).toLocaleString("en-KE");
+
+        // ADD TO CART BUTTON
+
+        const addToCart = document.createElement("button");
+        addToCart.type = "button";
+        addToCart.className = "hero-button secondary-button";
+        addToCart.textContent = "ADD TO CART";
+
+        addToCart.addEventListener("click", function () {
+
+            let cart = [];
+
+            try {
+                cart = JSON.parse(
+                    localStorage.getItem("winoraCart") || "[]"
+                );
+            } catch (error) {
+                cart = [];
+            }
+
+            const existingProduct = cart.find(function (item) {
+                return String(item.id) === String(product.id);
+            });
+
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: Number(product.price),
+                    image_url: product.image_url,
+                    quantity: 1
+                });
+            }
+
+            localStorage.setItem(
+                "winoraCart",
+                JSON.stringify(cart)
+            );
+
+            window.dispatchEvent(
+                new Event("winoraCartUpdated")
+            );
+
+            addToCart.textContent = "ADDED TO CART ✓";
+        });
+
+        // EXISTING WHATSAPP ORDER BUTTON
+
+        const enquire = document.createElement("a");
+        enquire.className = "hero-button";
+        enquire.textContent = "ORDER NOW";
+
+        enquire.href =
+            "https://wa.me/254742345359?text=" +
+            encodeURIComponent(
+                "Hello WINNORA! I would like to order " +
+                product.name +
+                " priced at KES " +
+                Number(product.price).toLocaleString("en-KE") +
+                ". Please assist me with completing my order."
+            );
+
+        enquire.target = "_blank";
+        enquire.rel = "noopener noreferrer";
+
+        card.append(
+            image,
+            name,
+            description,
+            price,
+            addToCart,
+            enquire
+        );
+
         productGrid.appendChild(card);
     });
 }
