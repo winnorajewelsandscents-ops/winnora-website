@@ -96,24 +96,52 @@ async function loadProducts() {
             addToCart.textContent = "ADDED TO CART ✓";
         });
 
-        // EXISTING WHATSAPP ORDER BUTTON
+       // ORDER NOW BUTTON - DIRECT CHECKOUT
 
-        const enquire = document.createElement("a");
-        enquire.className = "hero-button";
-        enquire.textContent = "ORDER NOW";
+const enquire = document.createElement("button");
+enquire.type = "button";
+enquire.className = "hero-button";
+enquire.textContent = "ORDER NOW";
 
-        enquire.href =
-            "https://wa.me/254742345359?text=" +
-            encodeURIComponent(
-                "Hello WINNORA! I would like to order " +
-                product.name +
-                " priced at KES " +
-                Number(product.price).toLocaleString("en-KE") +
-                ". Please assist me with completing my order."
-            );
+enquire.addEventListener("click", function () {
 
-        enquire.target = "_blank";
-        enquire.rel = "noopener noreferrer";
+    let cart = [];
+
+    try {
+        cart = JSON.parse(
+            localStorage.getItem("winoraCart") || "[]"
+        );
+    } catch (error) {
+        cart = [];
+    }
+
+    const existingProduct = cart.find(function (item) {
+        return String(item.id) === String(product.id);
+    });
+
+    if (existingProduct) {
+        existingProduct.quantity += 1;
+    } else {
+        cart.push({
+            id: product.id,
+            name: product.name,
+            price: Number(product.price),
+            image_url: product.image_url,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem(
+        "winoraCart",
+        JSON.stringify(cart)
+    );
+
+    window.dispatchEvent(
+        new Event("winoraCartUpdated")
+    );
+
+    window.location.href = "checkout.html";
+});
 
         card.append(
             image,
