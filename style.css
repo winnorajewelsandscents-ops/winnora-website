@@ -1523,3 +1523,33 @@ footer {
     flex: 1;
     min-width: 0;
 }
+/* WINNORA CLICKABLE HERO BANNER */
+
+.hero-image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-banner {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.hero-actions {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    transform: translateY(-50%);
+}
+
+.hero-actions .hero-button {
+    display: inline-block;
+    text-align: center;
+}
