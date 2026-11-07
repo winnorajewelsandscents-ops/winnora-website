@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Your Order | WINNORA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="brand">
+            <a href="index.html">
+                <img src="logo.jpeg" alt="WINNORA Logo" class="logo">
+            </a>
+            <p>ESSENCE OF YOU</p>
+        </div>
+    </header>
+
+    <main class="track-order-page">
+
+        <section class="track-order-box">
+
+            <h1>Track Your Order</h1>
+
+            <p>
+                Your WINNORA experience doesn't end at checkout.
+                Find out where your order is.
+            </p>
+
+            <form id="track-order-form">
+
+                <label for="order-reference">
+                    Order Reference
+                </label>
+
+                <input
+                    type="text"
+                    id="order-reference"
+                    placeholder="Enter your order reference"
+                    required
+                >
+
+                <label for="customer-phone">
+                    Phone Number
+                </label>
+
+                <input
+                    type="tel"
+                    id="customer-phone"
+                    placeholder="Enter the phone number used to order"
+                    required
+                >
+
+                <button type="submit">
+                    TRACK MY ORDER
+                </button>
+
+                <p id="tracking-message"></p>
+
+            </form>
+
+            <div id="tracking-result"></div>
+
+            <a href="index.html" class="back-home">
+                Return to WINNORA
+            </a>
+
+        </section>
+
+    </main>
+
+    <script type="module" src="track-order.js"></script>
+
+</body>
+</html>
