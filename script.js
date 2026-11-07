@@ -282,7 +282,7 @@ if (checkoutButton) {
             alert("Your shopping bag is empty!");
             return;
         }
-
+localStorage.setItem("winoraCheckoutMode", "cart");
         window.location.href = "checkout.html";
     });
 }
