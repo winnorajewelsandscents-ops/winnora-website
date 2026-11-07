@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WINNORA | Checkout</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="site-header">
+
+        <div class="brand">
+            <a href="index.html">
+                <img src="logo.jpeg" alt="WINNORA Logo" class="logo">
+            </a>
+            <p>ESSENCE OF YOU</p>
+        </div>
+
+        <nav class="main-nav">
+            <a href="index.html">Home</a>
+            <a href="jewels.html">Jewels</a>
+            <a href="parfums.html">Parfums</a>
+            <a href="about.html">Our Story</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+
+    </header>
+
+    <main class="checkout-page">
+
+        <section class="checkout-heading">
+            <p>WINNORA | ESSENCE OF YOU</p>
+            <h1>Complete Your Order</h1>
+            <p>Just a few details before your favourites are yours.</p>
+        </section>
+
+        <div class="checkout-container">
+
+            <section class="checkout-form-section">
+
+                <h2>Customer Details</h2>
+
+                <form id="checkout-form">
+
+                    <label for="customer-name">Full Name</label>
+                    <input
+                        type="text"
+                        id="customer-name"
+                        name="customer-name"
+                        placeholder="Enter your full name"
+                        required
+                    >
+
+                    <label for="customer-phone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="customer-phone"
+                        name="customer-phone"
+                        placeholder="e.g. 07XXXXXXXX"
+                        required
+                    >
+
+                    <label for="delivery-location">Delivery Location</label>
+                    <textarea
+                        id="delivery-location"
+                        name="delivery-location"
+                        placeholder="Enter your town, area and delivery address"
+                        required
+                    ></textarea>
+
+                    <label for="delivery-notes">
+                        Additional Delivery Instructions (Optional)
+                    </label>
+
+                    <textarea
+                        id="delivery-notes"
+                        name="delivery-notes"
+                        placeholder="Any additional information?"
+                    ></textarea>
+
+                    <h2>Payment Method</h2>
+
+                    <label class="payment-option">
+                        <input
+                            type="radio"
+                            name="payment-method"
+                            value="M-Pesa"
+                            required
+                        >
+                        M-Pesa
+                    </label>
+
+                    <label class="payment-option">
+                        <input
+                            type="radio"
+                            name="payment-method"
+                            value="WhatsApp"
+                        >
+                        Arrange payment via WhatsApp
+                    </label>
+
+                    <button type="submit" class="checkout-submit">
+                        PLACE ORDER
+                    </button>
+
+                </form>
+
+            </section>
+
+            <section class="order-summary">
+
+                <h2>Your Order Summary</h2>
+
+                <div id="checkout-items">
+                    Loading your items...
+                </div>
+
+                <div class="checkout-total">
+                    <span>Subtotal</span>
+                    <strong id="checkout-subtotal">KES 0</strong>
+                </div>
+
+                <p class="delivery-notice">
+                    Delivery charges will be confirmed before payment.
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 WINNORA. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
