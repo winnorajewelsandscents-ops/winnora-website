@@ -360,7 +360,9 @@ productForm.addEventListener("submit", async function (event) {
     const price = Number(document.getElementById("product-price").value);
     const category = document.getElementById("product-category").value;
     const imageFile = document.getElementById("product-image").files[0];
-
+const stockQuantity = Number(
+    document.getElementById("product-stock").value
+);
     if (!imageFile || !imageFile.type.startsWith("image/")) {
         productMessage.textContent = "Please select a valid image.";
         return;
@@ -370,7 +372,14 @@ productForm.addEventListener("submit", async function (event) {
         productMessage.textContent = "Please enter a valid price.";
         return;
     }
-
+if (
+    !Number.isInteger(stockQuantity) ||
+    stockQuantity < 0
+) {
+    productMessage.textContent =
+        "Please enter a valid stock quantity.";
+    return;
+}
     productMessage.textContent = "Uploading product...";
 
     const { data: userData, error: userError } =
@@ -409,13 +418,13 @@ productForm.addEventListener("submit", async function (event) {
     const { error: insertError } = await supabase
         .from("products")
         .insert([{
-            name: name,
-            description: description,
-            price: price,
-            category: category,
-            image_url: imageData.publicUrl
-        }]);
-
+    name: name,
+    description: description,
+    price: price,
+    category: category,
+    image_url: imageData.publicUrl,
+    stock_quantity: stockQuantity
+}]);
     if (insertError) {
         productMessage.textContent =
             "Product details could not be saved: " + insertError.message;
