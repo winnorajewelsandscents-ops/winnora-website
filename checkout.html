@@ -293,11 +293,26 @@ checkoutForm.addEventListener("submit", async function(event) {
 
         checkoutForm.reset();
 
-        statusMessage.textContent =
-            "Thank you for shopping with WINNORA! " +
-            "Your order reference is " + result.order_id +
-            ". We will contact you about delivery and payment.";
+       statusMessage.textContent =
+            "Thank you for shopping with WINNORA! Your order reference is " +
+            result.order_id +
+            ". We will contact you about delivery and payment. ";
 
+        const trackingLink = document.createElement("a");
+        trackingLink.href = "track-order.html";
+        trackingLink.textContent = "Track My Order";
+        trackingLink.style.display = "inline-block";
+        trackingLink.style.marginTop = "10px";
+        trackingLink.style.fontWeight = "bold";
+
+        statusMessage.appendChild(document.createElement("br"));
+        statusMessage.appendChild(trackingLink);
+        statusMessage.appendChild(document.createElement("br"));
+
+        const trackingInstructions = document.createElement("small");
+        trackingInstructions.textContent =
+            "Use your order reference and the phone number you entered at checkout.";
+        statusMessage.appendChild(trackingInstructions);
         submitButton.textContent = "ORDER RECEIVED";
 
     } catch (error) {
