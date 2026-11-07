@@ -1090,3 +1090,59 @@ footer {
     opacity: 0.5;
     cursor: not-allowed;
 }
+/* WINNORA CART PRODUCT ITEMS */
+
+.cart-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eaded9;
+}
+
+.cart-item-image {
+    width: 75px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.cart-item-details {
+    flex: 1;
+}
+
+.cart-item-details h3 {
+    color: #17233f;
+    font-size: 15px;
+    margin: 0 0 8px;
+}
+
+.cart-item-details p {
+    color: #9b7954;
+    margin: 0 0 10px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.quantity-controls button {
+    width: 27px;
+    height: 27px;
+    background: #f2e5e1;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    color: #17233f;
+}
+
+.remove-cart-item {
+    background: none;
+    border: none;
+    color: #98765e;
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 12px;
+}
