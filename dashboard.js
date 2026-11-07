@@ -10,7 +10,7 @@ async function loadOrders() {
 
     const { data, error } = await supabase
         .from("orders")
-        .select("*, order_items(*)")
+       .select("*, order_items(*, products(image_url))")
         .order("created_at", { ascending: false });
 
     if (error) {
