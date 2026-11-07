@@ -109,7 +109,7 @@ const statusDropdown = document.createElement("select");
             paymentStatus,
             total,
             status,
-            statusDropdown
+            statusDropdown,
             itemsHeading,
             itemsList
         );
