@@ -98,51 +98,25 @@ async function loadProducts() {
 
        // ORDER NOW BUTTON - DIRECT CHECKOUT
 
-const enquire = document.createElement("button");
-enquire.type = "button";
-enquire.className = "hero-button";
-enquire.textContent = "ORDER NOW";
-
 enquire.addEventListener("click", function () {
 
-    let cart = [];
-
-    try {
-        cart = JSON.parse(
-            localStorage.getItem("winoraCart") || "[]"
-        );
-    } catch (error) {
-        cart = [];
-    }
-
-    const existingProduct = cart.find(function (item) {
-        return String(item.id) === String(product.id);
-    });
-
-    if (existingProduct) {
-        existingProduct.quantity += 1;
-    } else {
-        cart.push({
-            id: product.id,
-            name: product.name,
-            price: Number(product.price),
-            image_url: product.image_url,
-            quantity: 1
-        });
-    }
+    const directOrder = {
+        id: product.id,
+        name: product.name,
+        price: Number(product.price),
+        image_url: product.image_url,
+        quantity: 1
+    };
 
     localStorage.setItem(
-        "winoraCart",
-        JSON.stringify(cart)
+        "winoraDirectOrder",
+        JSON.stringify(directOrder)
     );
 
-    window.dispatchEvent(
-        new Event("winoraCartUpdated")
-    );
+    localStorage.setItem("winoraCheckoutMode", "direct");
 
     window.location.href = "checkout.html";
 });
-
         card.append(
             image,
             name,
