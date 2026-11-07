@@ -309,16 +309,15 @@ if (!Number.isInteger(stock) || stock < 0) {
     return;
 }
     const { error } = await supabase
-        .from("products")
-        .update({
-           .update({
-    name: newName.trim(),
-    description: newDescription.trim(),
-    price: price,
-    category: newCategory.trim(),
-    stock_quantity: stock
-})
-        .eq("id", product.id);
+    .from("products")
+    .update({
+        name: newName.trim(),
+        description: newDescription.trim(),
+        price: price,
+        category: newCategory.trim(),
+        stock_quantity: stock
+    })
+    .eq("id", product.id);
 
     if (error) {
         alert("Could not update product: " + error.message);
