@@ -146,13 +146,24 @@ enquire.className = "hero-button";
 enquire.textContent = "ORDER NOW";
 enquire.addEventListener("click", function () {
 
-    const directOrder = {
-        id: product.id,
-        name: product.name,
-        price: Number(product.price),
-        image_url: product.image_url,
-        quantity: 1
-    };
+   const selectedQuantity = Number(quantityInput.value);
+
+if (
+    !Number.isInteger(selectedQuantity) ||
+    selectedQuantity < 1 ||
+    selectedQuantity > stockQuantity
+) {
+    alert("Please select a valid quantity within the available stock.");
+    return;
+}
+
+const directOrder = {
+    id: product.id,
+    name: product.name,
+    price: Number(product.price),
+    image_url: product.image_url,
+    quantity: selectedQuantity
+};
 
     localStorage.setItem(
         "winoraDirectOrder",
