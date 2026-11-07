@@ -266,15 +266,10 @@ footer {
     color: #FFFFFF;
     transform: translateY(-3px);
 }
-<a href="https://wa.me/254742345359?text=Hello%20WINNORA%2C%20I%20would%20like%20to%20enquire%20about%20the%20WINNORA%20JEWELS%20collection.%20Could%20you%20share%20more%20details%3F"
-   class="order-button"
-   target="_blank"
-   rel="noopener noreferrer">
-   ENQUIRE NOW
-</a>
+
 /* WINNORA HOMEPAGE HERO */
 
-./* WINNORA HOMEPAGE HERO */
+/* WINNORA HOMEPAGE HERO */
 
 .hero {
     background: linear-gradient(
@@ -1145,4 +1140,261 @@ footer {
     text-decoration: underline;
     cursor: pointer;
     font-size: 12px;
+}
+/* =========================================
+   WINNORA ADMIN DASHBOARD REDESIGN
+========================================= */
+
+:root {
+    --gold: #C6A36A;
+    --soft-pink: #F8EDEF;
+    --deep-navy: #17172F;
+}
+
+/* DASHBOARD BACKGROUND */
+
+.admin-dashboard {
+    background: linear-gradient(180deg, #FFF8F7, #F8EDEF);
+    padding: 55px 6%;
+    max-width: 1500px;
+    margin: 0 auto;
+}
+
+/* WELCOME AREA */
+
+.admin-welcome {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.admin-welcome h1 {
+    font-size: 36px;
+    font-weight: normal;
+    letter-spacing: 1px;
+}
+
+.admin-welcome p {
+    color: #777;
+    margin-bottom: 22px;
+}
+
+.admin-welcome button {
+    min-width: 130px;
+}
+
+/* SECTION HEADINGS */
+
+.admin-section-heading {
+    text-align: left;
+    border-bottom: 1px solid #E8D5D8;
+    padding: 0 0 22px;
+    margin-bottom: 30px;
+}
+
+.admin-section-heading h2 {
+    color: var(--deep-navy);
+    font-size: 25px;
+    letter-spacing: 3px;
+    font-weight: normal;
+    margin-bottom: 8px;
+}
+
+.admin-section-heading p {
+    color: #777;
+    font-size: 14px;
+}
+
+/* PRODUCT MANAGEMENT AREA */
+
+.admin-product-management {
+    background: #F8EDEF;
+    padding: 35px;
+    margin-bottom: 55px;
+    border: 1px solid #EAD9DD;
+    box-shadow: 0 8px 25px rgba(23, 23, 47, 0.05);
+}
+
+.admin-product-form {
+    width: 100%;
+    max-width: 100%;
+    margin: 0 0 45px;
+    padding: 30px;
+    border: 1px solid #F0E3E6;
+    box-shadow: 0 5px 20px rgba(23, 23, 47, 0.04);
+}
+
+.admin-product-form h2,
+.admin-product-list h2 {
+    font-size: 22px;
+    margin-bottom: 22px;
+    color: var(--deep-navy);
+}
+
+.admin-product-form form {
+    max-width: 750px;
+}
+
+.admin-product-form label {
+    font-size: 14px;
+    color: var(--deep-navy);
+}
+
+.admin-product-form input,
+.admin-product-form textarea,
+.admin-product-form select {
+    border: 1px solid #E3CDD2;
+    border-radius: 3px;
+    padding: 14px;
+}
+
+.admin-product-form input:focus,
+.admin-product-form textarea:focus,
+.admin-product-form select:focus {
+    outline: 1px solid var(--gold);
+    border-color: var(--gold);
+}
+
+/* PRODUCT LIST */
+
+.admin-product-list {
+    margin-top: 0;
+    padding: 30px;
+    background: #FFFFFF;
+    border: 1px solid #F0E3E6;
+}
+
+#products-container {
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.admin-product-card {
+    border: 1px solid #F0E3E6;
+    box-shadow: 0 5px 18px rgba(23, 23, 47, 0.05);
+    transition: 0.3s ease;
+}
+
+.admin-product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(23, 23, 47, 0.09);
+}
+
+/* CUSTOMER ORDERS AREA */
+
+.admin-orders {
+    background: #FFFFFF;
+    padding: 35px;
+    border: 1px solid #EAD9DD;
+    box-shadow: 0 8px 25px rgba(23, 23, 47, 0.05);
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.admin-orders > button {
+    margin-bottom: 20px;
+}
+
+#orders-message {
+    color: #777;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+/* INDIVIDUAL ORDER CARDS */
+
+#orders-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+}
+
+.admin-order-card {
+    background: #FFF8F7;
+    border: 1px solid #EAD9DD;
+    border-top: 3px solid var(--gold);
+    padding: 24px;
+    box-shadow: 0 5px 18px rgba(23, 23, 47, 0.04);
+    overflow-wrap: anywhere;
+}
+
+.admin-order-card h3 {
+    font-size: 15px;
+    color: var(--deep-navy);
+    margin-bottom: 18px;
+}
+
+.admin-order-card h4 {
+    color: var(--deep-navy);
+    font-size: 16px;
+    margin: 20px 0 12px;
+}
+
+.admin-order-card p {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 9px;
+}
+
+.admin-order-card select {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: 1px solid #D9C5C8;
+    background: white;
+    color: var(--deep-navy);
+    font: inherit;
+}
+
+.admin-order-card ul {
+    padding-left: 20px;
+}
+
+.admin-order-card li {
+    font-size: 13px;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+/* DASHBOARD MOBILE RESPONSIVENESS */
+
+@media (max-width: 700px) {
+
+    .admin-dashboard {
+        padding: 30px 15px;
+    }
+
+    .admin-welcome h1 {
+        font-size: 27px;
+    }
+
+    .admin-product-management,
+    .admin-orders {
+        padding: 20px 15px;
+    }
+
+    .admin-product-form,
+    .admin-product-list {
+        padding: 20px 15px;
+    }
+
+    .admin-section-heading h2 {
+        font-size: 21px;
+        letter-spacing: 2px;
+    }
+
+    #orders-container {
+        grid-template-columns: 1fr;
+    }
+
+    #products-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .admin-product-card {
+        padding: 10px;
+    }
+
+    .admin-product-card img {
+        height: 150px;
+    }
 }
