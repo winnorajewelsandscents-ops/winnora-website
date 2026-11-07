@@ -48,7 +48,18 @@ async function loadProducts() {
         const price = document.createElement("p");
         price.textContent =
             "KES " + Number(product.price).toLocaleString("en-KE");
+// DISPLAY AVAILABLE STOCK
 
+const stock = document.createElement("p");
+stock.className = "product-stock";
+
+const stockQuantity = Number(product.stock_quantity);
+
+if (stockQuantity > 0) {
+    stock.textContent = "Available stock: " + stockQuantity;
+} else {
+    stock.textContent = "Currently out of stock";
+}
         // ADD TO CART BUTTON
 
         const addToCart = document.createElement("button");
@@ -120,14 +131,15 @@ enquire.addEventListener("click", function () {
 
     window.location.href = "checkout.html";
 });
-        card.append(
-            image,
-            name,
-            description,
-            price,
-            addToCart,
-            enquire
-        );
+      card.append(
+    image,
+    name,
+    description,
+    price,
+    stock,
+    addToCart,
+    enquire
+);
 
         productGrid.appendChild(card);
     });
