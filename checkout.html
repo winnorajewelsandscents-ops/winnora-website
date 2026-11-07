@@ -270,7 +270,13 @@ checkoutForm.addEventListener("submit", async function(event) {
 
     const paymentMethod =
         checkoutForm.elements["payment-method"].value;
+// Prepare WhatsApp window if customer selects WhatsApp
 
+let whatsappWindow = null;
+
+if (paymentMethod === "WhatsApp") {
+    whatsappWindow = window.open("about:blank", "_blank");
+}
     const items = cart.map(function(item) {
         return {
             id: item.id,
