@@ -40,6 +40,41 @@
             🛍️
             <span class="cart-count" id="cart-count">0</span>
         </button>
+        <!-- WINNORA Shopping Cart -->
+        <div class="cart-overlay" id="cart-overlay"></div>
+
+        <aside class="cart-panel" id="cart-panel"
+               aria-label="Shopping cart"
+               aria-hidden="true">
+
+            <div class="cart-header">
+                <h2>Your Shopping Bag</h2>
+
+                <button class="cart-close" id="cart-close"
+                        type="button" aria-label="Close cart">
+                    &times;
+                </button>
+            </div>
+
+            <div class="cart-items" id="cart-items">
+                <p class="empty-cart">
+                    Your shopping bag is currently empty.
+                </p>
+            </div>
+
+            <div class="cart-footer">
+                <div class="cart-total">
+                    <span>Subtotal</span>
+                    <strong id="cart-total">KES 0</strong>
+                </div>
+
+                <button class="checkout-button" id="checkout-button"
+                        type="button" disabled>
+                    PROCEED TO CHECKOUT
+                </button>
+            </div>
+
+        </aside>
     </header>
 
     <main>
