@@ -276,8 +276,13 @@ let whatsappWindow = null;
 
 if (paymentMethod === "WhatsApp") {
     whatsappWindow = window.open("about:blank", "_blank");
-}
-    const items = cart.map(function(item) {
+
+    if (whatsappWindow) {
+        whatsappWindow.document.write(
+            "<p style='font-family:Arial;text-align:center;margin-top:80px;'>Preparing your WINNORA WhatsApp order...</p>"
+        );
+    }
+} const items = cart.map(function(item) {
         return {
             id: item.id,
             quantity: item.quantity
