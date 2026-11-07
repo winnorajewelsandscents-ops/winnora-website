@@ -269,3 +269,20 @@ window.addEventListener(
 );
 
 displayWinoraCart();
+/* =================================
+   WINNORA CHECKOUT NAVIGATION
+================================= */
+
+if (checkoutButton) {
+    checkoutButton.addEventListener("click", function () {
+
+        const cart = getWinoraCart();
+
+        if (cart.length === 0) {
+            alert("Your shopping bag is empty!");
+            return;
+        }
+
+        window.location.href = "checkout.html";
+    });
+}
