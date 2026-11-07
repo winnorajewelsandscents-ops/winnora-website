@@ -137,6 +137,53 @@
     <footer>
         <p>&copy; 2026 WINNORA. All rights reserved.</p>
     </footer>
+<script>
+        const checkoutItems = document.getElementById("checkout-items");
+        const checkoutSubtotal = document.getElementById("checkout-subtotal");
 
+        let cart = [];
+
+        try {
+            cart = JSON.parse(
+                localStorage.getItem("winoraCart") || "[]"
+            );
+        } catch (error) {
+            cart = [];
+        }
+
+        checkoutItems.innerHTML = "";
+
+        if (cart.length === 0) {
+            checkoutItems.textContent =
+                "Your shopping bag is empty.";
+        }
+
+        let subtotal = 0;
+
+        cart.forEach(function (item) {
+
+            subtotal += Number(item.price) * Number(item.quantity);
+
+            const product = document.createElement("div");
+            product.className = "checkout-product";
+
+            const name = document.createElement("p");
+            name.textContent = item.name + " × " + item.quantity;
+
+            const price = document.createElement("strong");
+            price.textContent =
+                "KES " +
+                (Number(item.price) * Number(item.quantity))
+                    .toLocaleString("en-KE");
+
+            product.append(name, price);
+            checkoutItems.appendChild(product);
+        });
+
+        checkoutSubtotal.textContent =
+            "KES " + subtotal.toLocaleString("en-KE");
+    </script>
+</body>
+</html>
 </body>
 </html>
