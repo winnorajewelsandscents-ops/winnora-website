@@ -953,3 +953,140 @@ footer {
         padding: 10px;
     }
 }
+/* =================================
+   WINNORA SHOPPING CART
+================================= */
+
+.cart-toggle {
+    position: relative;
+    background: transparent;
+    border: none;
+    font-size: 23px;
+    cursor: pointer;
+    padding: 10px;
+    color: #17233f;
+}
+
+.cart-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #d9ad72;
+    color: #17233f;
+    font-size: 11px;
+    font-weight: bold;
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dark background behind cart */
+
+.cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s ease;
+    z-index: 999;
+}
+
+/* Sliding cart panel */
+
+.cart-panel {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: 380px;
+    max-width: 90%;
+    height: 100vh;
+    background: #fffaf8;
+    z-index: 1000;
+    box-shadow: -5px 0 25px rgba(0, 0, 0, 0.12);
+    display: flex;
+    flex-direction: column;
+    transition: right 0.35s ease;
+}
+
+/* Open cart */
+
+.cart-panel.active {
+    right: 0;
+}
+
+.cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Cart heading */
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    border-bottom: 1px solid #eaded9;
+}
+
+.cart-header h2 {
+    color: #17233f;
+    font-size: 21px;
+}
+
+.cart-close {
+    background: none;
+    border: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: #17233f;
+}
+
+/* Cart contents */
+
+.cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #777;
+    margin-top: 50px;
+}
+
+/* Cart footer */
+
+.cart-footer {
+    padding: 22px 20px;
+    border-top: 1px solid #eaded9;
+}
+
+.cart-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    color: #17233f;
+    font-size: 17px;
+}
+
+.checkout-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    background: #17233f;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.checkout-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
