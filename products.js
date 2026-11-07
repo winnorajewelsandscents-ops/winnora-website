@@ -82,7 +82,10 @@ if (stockQuantity <= 0) {
         addToCart.type = "button";
         addToCart.className = "hero-button secondary-button";
         addToCart.textContent = "ADD TO CART";
-
+if (stockQuantity <= 0) {
+    addToCart.disabled = true;
+    addToCart.textContent = "OUT OF STOCK";
+}
         addToCart.addEventListener("click", function () {
 
             let cart = [];
@@ -144,6 +147,10 @@ const enquire = document.createElement("button");
 enquire.type = "button";
 enquire.className = "hero-button";
 enquire.textContent = "ORDER NOW";
+        if (stockQuantity <= 0) {
+    enquire.disabled = true;
+    enquire.textContent = "OUT OF STOCK";
+}
 enquire.addEventListener("click", function () {
 
    const selectedQuantity = Number(quantityInput.value);
