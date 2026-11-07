@@ -320,7 +320,7 @@ if (paymentMethod === "WhatsApp") {
         }
 // OPEN WINNORA WHATSAPP AFTER SUCCESSFUL ORDER
 
-if (paymentMethod === "WhatsApp" && whatsappWindow) {
+if (paymentMethod === "WhatsApp") {
 
     const orderDetails = cart.map(function(item) {
         return item.name + " x " + item.quantity +
@@ -341,9 +341,15 @@ if (paymentMethod === "WhatsApp" && whatsappWindow) {
         Number(result.subtotal).toLocaleString("en-KE") +
         "\n\nPayment Method: Arrange payment via WhatsApp.";
 
-    whatsappWindow.location.href =
+    const whatsappUrl =
         "https://wa.me/254742345359?text=" +
         encodeURIComponent(whatsappMessage);
+
+    if (whatsappWindow && !whatsappWindow.closed) {
+        whatsappWindow.location.replace(whatsappUrl);
+    } else {
+        window.location.href = whatsappUrl;
+    }
 }
       // Clear only the items that were successfully ordered
 
