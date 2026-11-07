@@ -152,17 +152,25 @@ const ORDER_URL =
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable__fbfvfT-cAenAq8SQaqZYA_xP9QT-E0";
 
-// CHECK FOR DIRECT ORDER OR SHOPPING CART
+// CHECKOUT MODE: DIRECT ORDER OR SHOPPING CART
 
 let cart = [];
 let isDirectOrder = false;
 
 try {
-    const directOrder = localStorage.getItem("winoraDirectOrder");
+    const checkoutMode = localStorage.getItem("winoraCheckoutMode");
 
-    if (directOrder) {
-        cart = [JSON.parse(directOrder)];
-        isDirectOrder = true;
+    if (checkoutMode === "direct") {
+        const directOrder = localStorage.getItem("winoraDirectOrder");
+
+        if (directOrder) {
+            cart = [JSON.parse(directOrder)];
+            isDirectOrder = true;
+        } else {
+            cart = JSON.parse(
+                localStorage.getItem("winoraCart") || "[]"
+            );
+        }
     } else {
         cart = JSON.parse(
             localStorage.getItem("winoraCart") || "[]"
@@ -174,53 +182,7 @@ try {
 } catch (error) {
     cart = [];
     isDirectOrder = false;
-}order summary
-function displayCart() {
-    checkoutItems.innerHTML = "";
-
-    if (cart.length === 0) {
-        checkoutItems.textContent =
-            "Your shopping bag is empty.";
-        checkoutSubtotal.textContent = "KES 0";
-        submitButton.disabled = true;
-        return;
-    }
-
-    let subtotal = 0;
-
-    cart.forEach(function(item) {
-        const price = Number(item.price);
-        const quantity = Number(item.quantity);
-
-        if (
-            !Number.isFinite(price) ||
-            !Number.isSafeInteger(quantity) ||
-            quantity < 1
-        ) return;
-
-        subtotal += price * quantity;
-
-        const product = document.createElement("div");
-        product.className = "checkout-product";
-
-        const name = document.createElement("p");
-        name.textContent = item.name + " × " + quantity;
-
-        const amount = document.createElement("strong");
-        amount.textContent =
-            "KES " +
-            (price * quantity).toLocaleString("en-KE");
-
-        product.append(name, amount);
-        checkoutItems.appendChild(product);
-    });
-
-    checkoutSubtotal.textContent =
-        "KES " + subtotal.toLocaleString("en-KE");
-
-    submitButton.disabled = false;
 }
-
 displayCart();
 
 // Order status message
