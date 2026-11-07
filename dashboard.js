@@ -235,6 +235,7 @@ async function loadProducts() {
 
         const category = document.createElement("p");
         category.textContent = product.category;
+    
 const stock = document.createElement("p");
 stock.textContent = "Stock available: " + product.stock_quantity;
        const editButton = document.createElement("button");
@@ -290,22 +291,33 @@ async function editProduct(product) {
     );
 
     if (newCategory === null) return;
-
+const newStock = prompt(
+    "Enter the available stock quantity:",
+    product.stock_quantity ?? 0
+);
+if (newStock === null) return;
     const price = Number(newPrice);
 
     if (!newName.trim() || !Number.isFinite(price) || price < 0) {
         alert("Please enter a valid name and price.");
         return;
     }
+const stock = Number(newStock);
 
+if (!Number.isInteger(stock) || stock < 0) {
+    alert("Please enter a valid whole-number stock quantity.");
+    return;
+}
     const { error } = await supabase
         .from("products")
         .update({
-            name: newName.trim(),
-            description: newDescription.trim(),
-            price: price,
-            category: newCategory.trim()
-        })
+           .update({
+    name: newName.trim(),
+    description: newDescription.trim(),
+    price: price,
+    category: newCategory.trim(),
+    stock_quantity: stock
+})
         .eq("id", product.id);
 
     if (error) {
