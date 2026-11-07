@@ -1500,3 +1500,24 @@ footer {
         font-size: 25px;
     }
 }
+/* WINNORA ADMIN ORDER THUMBNAILS */
+
+.admin-order-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.admin-order-item-image {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    border-radius: 5px;
+    flex-shrink: 0;
+}
+
+.admin-order-item-details {
+    flex: 1;
+    min-width: 0;
+}
