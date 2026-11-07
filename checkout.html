@@ -313,7 +313,33 @@ if (paymentMethod === "WhatsApp") {
                 result.error || "Unable to submit your order."
             );
         }
+// OPEN WINNORA WHATSAPP AFTER SUCCESSFUL ORDER
 
+if (paymentMethod === "WhatsApp" && whatsappWindow) {
+
+    const orderDetails = cart.map(function(item) {
+        return item.name + " x " + item.quantity +
+            " - KES " +
+            (Number(item.price) * Number(item.quantity))
+                .toLocaleString("en-KE");
+    }).join("\n");
+
+    const whatsappMessage =
+        "Hello WINNORA! I have placed an order.\n\n" +
+        "Order Reference: " + result.order_id + "\n\n" +
+        "CUSTOMER DETAILS\n" +
+        "Name: " + customerName + "\n" +
+        "Phone: " + customerPhone + "\n" +
+        "Delivery Location: " + deliveryLocation + "\n\n" +
+        "ORDER DETAILS\n" + orderDetails + "\n\n" +
+        "Subtotal: KES " +
+        Number(result.subtotal).toLocaleString("en-KE") +
+        "\n\nPayment Method: Arrange payment via WhatsApp.";
+
+    whatsappWindow.location.href =
+        "https://wa.me/254742345359?text=" +
+        encodeURIComponent(whatsappMessage);
+}
       // Clear only the items that were successfully ordered
 
 if (isDirectOrder) {
