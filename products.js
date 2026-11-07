@@ -147,16 +147,17 @@ enquire.addEventListener("click", function () {
 
     window.location.href = "checkout.html";
 });
-      card.append(
+     card.append(
     image,
     name,
     description,
     price,
     stock,
+    quantityLabel,
+    quantityInput,
     addToCart,
     enquire
 );
-
         productGrid.appendChild(card);
     });
 }
